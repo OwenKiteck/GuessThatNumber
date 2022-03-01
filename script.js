@@ -33,27 +33,63 @@ while (restartGame) {
     randomNum = Math.floor(randomNum)
 
     // Set the number of attempts
-    attempts = parseInt(prompt(`Please enter a number of attempts allowed:`));
+    attempts = parseInt(prompt(`Please enter a number of attempts:`));
     while (!attempts || attempts < 1 || attempts > randomNum) {
         attempts = parseInt(prompt(`Attempts must be a number between 0 and ${rangeNum}`));
     };
 
-    guess = prompt(`Pick a number from 0 to ${rangeNum}`)
-    while (guess !== randomNum) {
-        if (guess > randomNum) {
-            guess = prompt(`You guessed too high. Pick a number from ${lowRangeNum} to ${topRangeNum}. You have ${attempts} attempt(s) left:`);
-            guess = parseInt(guess);
+    
+
+
+    // 
+    // 
+    alert(`hahaha`)
+
+    guess = prompt(`Pick a number from 0 to ${rangeNum}. You have ${attempts} attempt(s) left:`)
+    while (true) {
+        guess = parseInt(guess)
+        while (!guess || guess < 1 || guess > rangeNum) {
+            guess = parseInt(prompt(`Pick a number from 0 to ${rangeNum}. You have ${attempts} attempt(s) left:`))
+        }
+        attempts--;
+
+        if (guess === randomNum) {
+            alert(`CONGRATULATIONS YOU GUESSED THE CORRECT NUMBER: ${randomNum}`)
+            break;
+        } else if (attempts === 0) {
+            alert(`Sorry, but tou ran out of attempts. The number was ${randomNum}`)
+            break;
         } else if (guess < randomNum) {
-            guess = prompt(`You guessed too low. Pick a number from ${lowRangeNum} to ${topRangeNum}. You have ${attempts} attempt(s) left:`);
-            guess = parseInt(guess);
-        };
-        // Changing the seen range in the prompts (not the actual range)
-        if (guess < topRangeNum) {
-            topRangeNum = guess;
-        } 
-        if (guess > lowRangeNum) {
-            lowRangeNum = guess;
+            guess = prompt(`Too low. Pick a number from 0 to ${rangeNum}. You have ${attempts} attempt(s) left:`)
+        } else if (guess > randomNum) {
+            guess = prompt(`Too high. Pick a number from 0 to ${rangeNum}. You have ${attempts} attempt(s) left:`)
+
         }
     }
+    // 
+    // 
+
     break;
 }
+
+            // Entering guesses
+                guess = undefined;
+                while (guess !== randomNum) {
+
+                    if (guess == undefined) {
+                        guess = parseInt(prompt(`Pick a number from 0 to ${rangeNum}. You have ${attempts} attempt(s) left:`));
+                    }
+
+                    if (guess > randomNum) {
+                        guess = parseInt(prompt(`Too high. Pick a number from ${lowRangeNum} to ${topRangeNum}. You have ${attempts} attempt(s) left:`));
+                    } else if (guess < randomNum) {
+                        guess = parseInt(prompt(`Too low. Pick a number from ${lowRangeNum} to ${topRangeNum}. You have ${attempts} attempt(s) left:`));
+                    };
+                    // Changing the seen range in the prompts (not the actual range)
+                    if (guess < topRangeNum && guess > rangeNum) {
+                        topRangeNum = guess;
+                    } 
+                    if (guess > lowRangeNum && guess < rangeNum) {
+                        lowRangeNum = guess;
+                    }
+                }
